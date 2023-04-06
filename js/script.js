@@ -216,7 +216,6 @@ const setup = (array) => {
     })
     
     //task3
-    array.sort((a, b) => a.totalMoney < b.totalMoney ? 1 : -1);
     successful = array.filter(elem => elem.totalMoney >= 100000)
     unsuccessful = array.filter(elem => elem.totalMoney < 100000)
 
