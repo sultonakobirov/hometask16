@@ -131,7 +131,7 @@ const setup = (array) => {
         //Слагаем все налоги элементов и записываем их в одну переменную
 
         //task6
-        element.taxMoney = (element.tax * element.budget / 100)
+        element.taxMoney = (element.tax * element.budget / 100) // добавляем ключ с суммой налога
         taxesMax = array.reduce((prev, current) => prev.taxMoney > current.taxMoney ? prev : current, {});  
         taxesMin = array.reduce((prev, current) => prev.taxMoney < current.taxMoney ? prev : current, {});
         //Находим максимальный и минимальный налог, оплачиваемый компаниями используя reduce() ссылка на решение этой задачи:https://qna.habr.com/q/609651
