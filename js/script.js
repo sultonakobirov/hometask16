@@ -89,7 +89,7 @@ title: 'Salaries',
 
 total: 414000
 
-},
+}, 
 
 {
 
@@ -188,53 +188,49 @@ total: 212000
 },
 
 ]
-let bankClone = JSON.parse(JSON.stringify(bank)) //cloning array 
+let bankClone = JSON.parse(JSON.stringify(bank)) //cloning array
 
 const setup = (array) => {
     array.forEach(element => {
-        //task1
-        let total = 0
-        element.expensesPerYear.forEach(elem => {
-            total = total + elem.total
-            element.expensesPerMonth = total/12
 
-        })
+        //task1
+        element.expensesPerMonth = Math.round(element.expensesPerYear.reduce((a,b)=>b.total + a, 0) / 12)
+        //Укоротил код добавив все элементы все элементы expensesPerYear и разделил ее на 12 одновременно округляя ее значение 
 
         //task2
-        element.percent = ( element.expensesPerMonth / element.budget ) *100
-        element.percent = element.percent + "%"
+        element.percent = element.expensesPerMonth / (element.budget/12) * 100
+        // Чтобы найти отношение одного числа к другому нужно делить одно число на другое и умножить их на 100
 
-        //task4-5-6
-        element.totalTaxes = element.budget - ((element.budget /100)*element.tax)
-        taxes += +element.totalTaxes
-        allTaxes.push(element.totalTaxes)
-        allTaxes.sort((a, b) => a - b)
-        taxesMax = allTaxes[allTaxes.length - 1]
-        taxesMin = allTaxes[0]
-        element.totalMoney = element.budget - element.expensesPerMonth - element.totalTaxes
+        //task5
+        element.totalMoney = element.budget - (element.expensesPerMonth * 12 + (element.tax * element.budget / 100))
+        //Создал ключ тоталМани от element.budget отнял все расходы и налоги
 
+        //task3 
+        if (element.totalMoney >= 0) {
+            successful.push(element)
+        }else{
+            unsuccessful.push(element)
+        } 
+
+        //task4
+        taxes += element.tax * element.budget / 100
+
+        //task
+        element.taxMoney = (element.tax * element.budget / 100)
+        taxesMax = array.reduce((prev, current) => prev.taxMoney > current.taxMoney ? prev : current, {});
+        taxesMin = array.reduce((prev, current) => prev.taxMoney < current.taxMoney ? prev : current, {});
     })
-    
-    //task3
-    
-    successful = array.filter(elem => elem.totalMoney >= 100000)
-    unsuccessful = array.filter(elem => elem.totalMoney < 100000)
-
-    //task 5
-    taxesMax = array.filter(element => element.totalTaxes === taxesMax)
-    taxesMin = array.filter(element => element.totalTaxes === taxesMin)
-
+    //outputs
     console.log(array);
-    console.log("<====================================>");
-    console.log("<TaxesMax>");
-    console.log(taxesMax);
-    console.log("<TaxesMin>");
-    console.log(taxesMin);
     console.log("<Successful>");
     console.log(successful);
     console.log("<Unsuccessful>");
     console.log(unsuccessful);
-
+    console.log("<Taxes>");
+    console.log(taxes);
+    console.log("<TaxesMax>");
+    console.log(taxesMax);
+    console.log(taxesMin);
 }
 
 setup(bankClone)
