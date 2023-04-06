@@ -109,7 +109,7 @@ const setup = (array) => {
 
         //task1
         element.expensesPerMonth = Math.round(element.expensesPerYear.reduce((a,b)=>b.total + a, 0) / 12)
-        //Укоротил код добавив все элементы все элементы expensesPerYear и разделил ее на 12 одновременно округляя ее значение 
+        //добавляем все элементы expensesPerYear и разделил ее на 12 одновременно округляя ее значение 
 
         //task2
         element.percent = element.expensesPerMonth / (element.budget/12) * 100
@@ -134,9 +134,10 @@ const setup = (array) => {
         element.taxMoney = (element.tax * element.budget / 100) // добавляем ключ с суммой налога
         taxesMax = array.reduce((prev, current) => prev.taxMoney > current.taxMoney ? prev : current, {});  
         taxesMin = array.reduce((prev, current) => prev.taxMoney < current.taxMoney ? prev : current, {});
-        //Находим максимальный и минимальный налог, оплачиваемый компаниями используя reduce() ссылка на решение этой задачи:https://qna.habr.com/q/609651
-
+        //Находим максимальный и минимальный налог, оплачиваемый компаниями используя reduce() ссылка на решение этой задачи: https://qna.habr.com/q/609651
+        
     })
+
     //outputs
     console.log(array);
     console.log("<Successful>");
