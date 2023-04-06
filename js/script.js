@@ -216,8 +216,9 @@ const setup = (array) => {
     })
     
     //task3
-    successful = array.filter(elem => elem.budget - (elem.budget /100 * elem.tax )>= 100000)
-    unsuccessful = array.filter(elem => elem.budget - (elem.budget /100 * elem.tax ) < 100000)
+    
+    successful = array.filter(elem => elem.totalMoney >= 100000)
+    unsuccessful = array.filter(elem => elem.totalMoney < 100000)
 
     //task 5
     taxesMax = array.filter(element => element.totalTaxes === taxesMax)
