@@ -215,7 +215,7 @@ const setup = (array) => {
         //task4
         taxes += element.tax * element.budget / 100
 
-        //task
+        //task6
         element.taxMoney = (element.tax * element.budget / 100)
         taxesMax = array.reduce((prev, current) => prev.taxMoney > current.taxMoney ? prev : current, {});
         taxesMin = array.reduce((prev, current) => prev.taxMoney < current.taxMoney ? prev : current, {});
