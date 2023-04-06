@@ -108,8 +108,8 @@ const setup = (array) => {
     array.forEach(element => {
 
         //task1
-        element.expensesPerMonth = Math.round(element.expensesPerYear.reduce((a,b)=>b.total + a, 0) / 12)
-        //добавляем все элементы expensesPerYear и разделил ее на 12 одновременно округляя ее значение 
+        element.expensesPerMonth = element.expensesPerYear.reduce((a,b)=>b.total + a, 0) / 12
+        //добавляем все элементы expensesPerYear и разделяем ее на 12 
 
         //task2
         element.percent = element.expensesPerMonth / (element.budget/12) * 100
@@ -135,7 +135,12 @@ const setup = (array) => {
         taxesMax = array.reduce((prev, current) => prev.taxMoney > current.taxMoney ? prev : current, {});  
         taxesMin = array.reduce((prev, current) => prev.taxMoney < current.taxMoney ? prev : current, {});
         //Находим максимальный и минимальный налог, оплачиваемый компаниями используя reduce() ссылка на решение этой задачи: https://qna.habr.com/q/609651
-        
+
+        //task1.1 task2.1
+        element.percent = Math.round(element.percent) 
+        //округляем процентные соотношения двух чисел в procent task1
+        element.expensesPerMonth = Math.round(element.expensesPerMonth)
+        //округляем месячные траты
     })
 
     //outputs
